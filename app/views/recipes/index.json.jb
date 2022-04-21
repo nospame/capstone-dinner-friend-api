@@ -6,6 +6,7 @@
     servings: recipe.servings,
     tags: recipe.tags,
     ingredients: recipe.ingredients,
+    ingredients_list: recipe.ingredients_list,
     steps: recipe.steps
   }
 end

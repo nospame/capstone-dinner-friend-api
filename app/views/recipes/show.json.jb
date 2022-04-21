@@ -1,5 +1,10 @@
 {
   id: @recipe.id,
-  created_at: @recipe.created_at,
-  updated_at: @recipe.updated_at
+  name: @recipe.name,
+  description: @recipe.description,
+  servings: @recipe.servings,
+  tags: @recipe.tags,
+  ingredients: @recipe.ingredients,
+  ingredients_list: @recipe.ingredients_list,
+  steps: @recipe.steps
 }
