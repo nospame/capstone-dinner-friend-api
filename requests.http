@@ -1,4 +1,4 @@
-GET http://localhost:3000/recipes.json
+GET http://localhost:3000/recipes.json?query=garlic
 
 ###
 GET http://localhost:3000/recipes/1.json

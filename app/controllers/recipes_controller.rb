@@ -1,6 +1,11 @@
 class RecipesController < ApplicationController
   def index
-    @recipes = Recipe.all
+    if params[:query]
+      # Recipes that include ingredients which match either: the ingredient's recipe's name or the ingredient's name
+      @recipes = Recipe.includes(:ingredients).where('recipes.name LIKE :query or ingredients.name LIKE :query', query: "%#{params[:query]}%").references(:ingredients)
+    else
+      @recipes = Recipe.all
+    end
     render template: "recipes/index"
   end
 
@@ -9,3 +14,5 @@ class RecipesController < ApplicationController
     render template: "recipes/show"
   end
 end
+
+
