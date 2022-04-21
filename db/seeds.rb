@@ -1,6 +1,6 @@
 require 'csv'
 
-table = CSV.parse(File.read("first_10_recipes.csv"), headers: true)
+table = CSV.parse(File.read("first_1000_recipes.csv"), headers: true)
 table.each do |row|
   # create the recipe with independent attributes
   recipe = Recipe.create!(
@@ -9,7 +9,7 @@ table.each do |row|
     servings: row["servings"].to_i
   )
 
-  steps = row["steps"].delete("[]").split("\", \"")
+  steps = row["steps"].delete("[]").delete_prefix("'").delete_suffix("'").split("\', \'")
   steps.each do |step|
     Step.create!(
       description: step,
@@ -49,21 +49,20 @@ table.each do |row|
       {name: ingredient, prefix: s_d.split("#{ingredient}")[0], suffix: s_d.split("#{ingredient}")[1]}
     end
   end
-  ingredient_details = formatted_details
-
+ 
   #create a new Ingredient entry for each ingredient that doesn't exist
-  ingredient_details.each do |i_d|
-    ingredient = Ingredient.find_by(name: i_d[:name]) || Ingredient.create!(name: i_d[:name])
+  formatted_details.each do |f_d|
+    ingredient = Ingredient.find_by(name: f_d[:name]) || Ingredient.create!(name: f_d[:name])
 
     #recipe_ingredients to associate
     RecipeIngredient.create!(
       recipe_id: recipe.id,
       ingredient_id: ingredient.id,
-      prefix: i_d[:prefix],
-      suffix: i_d[:suffix]
+      prefix: f_d[:prefix],
+      suffix: f_d[:suffix]
     )
   end
-  p recipe
+  p "#{recipe.name} added"
 end
 
 
