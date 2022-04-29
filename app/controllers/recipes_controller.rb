@@ -6,7 +6,7 @@ class RecipesController < ApplicationController
       .where('recipes.name LIKE :query OR ingredients.name LIKE :query', query: "%#{params[:query]}%")
       .distinct.limit(20).references(:ingredients, :tags)
     else
-      @recipes = Recipe.all.limit(20)
+      @recipes = Recipe.includes(:ingredients, :tags).all.limit(20)
     end
     render template: "recipes/index"
   end
