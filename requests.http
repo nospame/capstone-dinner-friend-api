@@ -1,4 +1,4 @@
-GET http://localhost:3000/recipes/512.json
+GET http://localhost:3000/recipes/25.json
 
 ###
-GET http://localhost:3000/recipes.json?query=chocolate
+GET http://localhost:3000/recipes.json?query=orange

@@ -1,11 +1,10 @@
 class RecipesController < ApplicationController
   def index
     if params[:query]
-      # feels faster, but for each recipe, only puts out the matching ingredient
-      # @recipes = Recipe.includes(:ingredients).where('recipes.name LIKE :query OR ingredients.name LIKE :query', query: "%#{params[:query]}%").references(:ingredients).limit(20)
-
-      # feels slower, but gives the needed info
-      @recipes = Recipe.joins(:ingredients).where('recipes.name LIKE :query OR ingredients.name LIKE :query', query: "%#{params[:query]}%").limit(20)
+      # only returns matching ingredients with data - for all ingredients use .joins
+      @recipes = Recipe.includes(:ingredients, :tags)
+      .where('recipes.name LIKE :query OR ingredients.name LIKE :query', query: "%#{params[:query]}%")
+      .distinct.limit(20).references(:ingredients, :tags)
     else
       @recipes = Recipe.all.limit(20)
     end

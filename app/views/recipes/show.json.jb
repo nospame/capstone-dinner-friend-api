@@ -3,8 +3,8 @@
   name: @recipe.name,
   description: @recipe.description,
   servings: @recipe.servings,
-  tags: @recipe.tags.map{|t| {name: t.name, id: t.id}},
+  tags: @recipe.tags,
   ingredients_list: @recipe.ingredients_list,
-  ingredients: @recipe.ingredients.map{|i| {name: i.name, id: i.id}},
-  steps: @recipe.steps.map{|s| s.description}
+  ingredients: @recipe.ingredients,
+  steps: @recipe.steps
 }

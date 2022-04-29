@@ -4,7 +4,7 @@
     name: recipe.name,
     description: recipe.description,
     servings: recipe.servings,
-    tags: recipe.tags.map{|t| {name: t.name, id: t.id}},
-    ingredients: recipe.ingredients.map{|i| {name: i.name, id: i.id}}
+    tags: recipe.tags,
+    ingredients: recipe.ingredients
   }
 end
