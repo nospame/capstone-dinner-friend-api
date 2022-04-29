@@ -4,7 +4,7 @@ class RecipesController < ApplicationController
     offset = params[:offset] || 0
     # only returns matching ingredients with data - for all ingredients use .joins
     @recipes = Recipe.includes(:ingredients, :tags)
-      .where('recipes.name LIKE :query OR ingredients.name LIKE :query', query: "%#{query}%")
+      .where('recipes.name ILIKE :query OR ingredients.name ILIKE :query', query: "%#{query}%")
       .limit(20)
       .references(:ingredients, :tags)
       .order('recipes.id')

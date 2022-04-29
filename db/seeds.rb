@@ -4,11 +4,12 @@ table = CSV.parse(File.read("first_1000_recipes.csv"), headers: true)
 table.each do |row|
   # create the recipe with independent attributes
   recipe = Recipe.create!(
-    name: row["name"],
-    description: row["description"],
+    name: CGI::unescapeHTML(row["name"]).squeeze(' ').titleize,
+    description: CGI::unescapeHTML(row["description"] || ''),
     servings: row["servings"].to_i
   )
 
+  # split and create the steps
   steps = row["steps"].delete("[]").delete_prefix("'").delete_suffix("'").split("\', \'")
   steps.each do |step|
     Step.create!(
@@ -17,44 +18,48 @@ table.each do |row|
     )
   end
   
-  #split the tags
+  # split tags
   tags = row["search_terms"].delete("{}'").split(', ')
 
-  #create a new Tag entry for each tag that doesn't already exist
+  # create each tag if needed
   tags.each do |t|
     tag = Tag.find_by(name: t) || Tag.create!(name: t)
 
-    #create recipe_tags to associate
+    # create recipe_tags to associate
     RecipeTag.create!(
       recipe_id: recipe.id,
       tag_id: tag.id
     )
   end
 
-  #split the ingredients
+  # split the ingredients
   ingredients = row["ingredients"].delete("[]'").split(', ')
 
-  #split the ingredient details to end up with formatted details
-  ingredient_details = row["ingredients_raw_str"].split("\",\"")
+  # split the ingredient details to end up with formatted details
+  ingredient_details = CGI::unescape(row["ingredients_raw_str"].gsub("\\u00", "%")).split("\",\"")
   ingredient_details.each do |detail|
     detail.delete!("[]'\"")
-    detail.squeeze!(" ")
+    detail.squeeze!(' ')
   end
 
-  #format looks like {name: 'water', prefix: '4 cups ', suffix: ''}
+  # format the details for each ingredient
   formatted_details = []
   ingredients.each do |ingredient|
+
+    # select the details containing this ingredient as there may be more than one
     selected_details = ingredient_details.select{|i_d| i_d.include?(ingredient)}
+
+    # format details as {name: 'ingredient', prefix: 'some quantity', suffix: 'some preparation'}
     formatted_details += selected_details.map do |s_d|
       {name: ingredient, prefix: s_d.split("#{ingredient}")[0], suffix: s_d.split("#{ingredient}")[1]}
     end
   end
  
-  #create a new Ingredient entry for each ingredient that doesn't exist
+  # create each ingredient if needed
   formatted_details.each do |f_d|
     ingredient = Ingredient.find_by(name: f_d[:name]) || Ingredient.create!(name: f_d[:name])
 
-    #recipe_ingredients to associate
+    # create recipe_ingredients to associate
     RecipeIngredient.create!(
       recipe_id: recipe.id,
       ingredient_id: ingredient.id,
@@ -62,29 +67,5 @@ table.each do |row|
       suffix: f_d[:suffix]
     )
   end
-  p "#{recipe.name} added"
+  p "#{recipe.name} created"
 end
-
-
-
-
-
-
-# p ingredients
-# p ingredient_details
-# steps
-
-# get the prefix and suffix out of ingredient details, based on ingredients
-# for each ingredient, find ingredient details that include it - split the matching details based on ingredient name
-# make the prefix anything before the name, suffix anything after
-
-# ingredient_details ultimately: [{name: 'water', prefix: '4 cups', suffix: ''}, ]
-# what's the difference between 'tags' and 'search terms' in this dataset?
-
-# find and replace in CSV
-# clean &amp; (&) &quot; (") from recipe name
-# clean %26 (&) and %2c (,) from ingredients
-# clean \u003d (=) from ingredients_raw_str
-# \u0027 (')
-# \u003c (<)
-# %27 (')
