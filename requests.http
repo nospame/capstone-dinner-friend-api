@@ -1,7 +1,7 @@
 GET http://localhost:3000/recipes/25.json
 
 ###
-GET http://localhost:3000/recipes.json?query=chicken&offset=40
+GET http://localhost:3000/recipes.json?query=curry
 
 
 ###

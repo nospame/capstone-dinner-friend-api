@@ -1,24 +1,24 @@
-# README
+# Dinner Party's Friend (API)
+Helps plan food-based social events (i.e. "dinner parties") by searching for recipes based on ingredient or tags and giving information on drink pairings. 
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is the backend search only, accepting GET requests for `/recipes.json?query=SEARCH_TERM&offset=OPTIONAL_ITEMS_TO_SKIP` and `/recipes/:RECIPE_ID.json`.
 
-Things you may want to cover:
+* App version
+0.3
 
 * Ruby version
+3.0.3
 
-* System dependencies
+* Rails version
+7.0.2
 
-* Configuration
+* Setup
+```bundle install```
 
 * Database creation
+```rails db:create```
 
 * Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+```rails db:migrate
+rails db:seed
+```
