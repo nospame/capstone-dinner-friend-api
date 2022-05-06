@@ -1,11 +1,12 @@
 GET http://localhost:3000/recipes/25.json
 
 ###
-GET http://localhost:3000/recipes.json?query=curry
+GET http://localhost:3000/recipes.json?query=curry&tags=71
+
 
 
 ###
-GET http://localhost:3000/recipes.json
+GET http://localhost:3000/recipes.json?tags=6,42,71
 
 
 ###
