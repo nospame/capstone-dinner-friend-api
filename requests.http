@@ -6,3 +6,7 @@ GET http://localhost:3000/recipes.json?query=curry
 
 ###
 GET http://localhost:3000/recipes.json
+
+
+###
+GET http://localhost:3000/tags.json
