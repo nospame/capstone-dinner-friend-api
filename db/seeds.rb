@@ -1,6 +1,8 @@
 require 'csv'
+require 'benchmark'
 
-table = CSV.parse(File.read("first_1000_recipes.csv"), headers: true)
+puts Benchmark.measure{
+table = CSV.parse(File.read("recipes_w_search_terms.csv"), headers: true)
 table.each do |row|
   # create the recipe with independent attributes
   recipe = Recipe.create!(
@@ -69,3 +71,4 @@ table.each do |row|
   end
   p "#{recipe.name} created"
 end
+}
