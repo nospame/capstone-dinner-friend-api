@@ -11,12 +11,8 @@ class Recipe < ApplicationRecord
     end
   end
 
-  def includes_tag?(tag)
-    # RecipeTag.exists?(recipe_id: id, tag_id: tag.to_i)
-  end
-
   def self.search(params)
-    whereables_or = [
+    whereables = [
       Whereable.new(
         valid: params[:q] ? true : false,
         where: Recipe.where("recipes.name ILIKE ?", "%#{params[:q]}%")
@@ -29,20 +25,24 @@ class Recipe < ApplicationRecord
 
     @recipes = Recipe
     .includes(:ingredients, :tags)
-    .merge(whereables_or
+    .merge(whereables
       .select(&:valid)
       .map(&:where)
       .reduce(:or)
     )
     .references(:ingredients, :tags)
     # .limit(20)
-    .offset(params[:offset])
+    # .offset(params[:offset])
+    .order('recipes.name')
 
-    params[:tags].split(',').each do |tag|
-      @recipes = @recipes.select{|recipe| recipe.tags.include?(Tag.find_by(name: tag))}
+    if params[:tags]
+      params[:tags].split(',').each do |tag|
+        tag = Tag.find_by(name: tag)
+        @recipes = @recipes.select{|recipe| recipe.tags.include?(tag)}
+      end
     end
 
-    # @recipes = @recipes.limit(20)
+    @recipes = @recipes.slice(params[:offset].to_i || 0, 20)
 
     return @recipes
   end
