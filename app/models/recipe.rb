@@ -11,11 +11,9 @@ class Recipe < ApplicationRecord
     end
   end
 
-  Whereable = Struct.new(
-    :valid,
-    :where,
-    keyword_init: true
-  )
+  def includes_tag?(tag)
+    # RecipeTag.exists?(recipe_id: id, tag_id: tag.to_i)
+  end
 
   def self.search(params)
     whereables_or = [
@@ -24,30 +22,29 @@ class Recipe < ApplicationRecord
         where: Recipe.where("recipes.name ILIKE ?", "%#{params[:q]}%")
       ),
       Whereable.new(
-        valid: params[:i] ? true : false,
-        where: Recipe.where("ingredients.name ILIKE ?", "%#{params[:i]}%")
-      )
-    ]
-    whereables_and = [
-      Whereable.new(
-        valid: params[:tags] ? true : false,
-        where: Recipe.where("tags.name LIKE ?", "%#{params[:tags]}%")
+        valid: params[:q] ? true : false,
+        where: Recipe.where("ingredients.name ILIKE ?", "%#{params[:q]}%")
       )
     ]
 
-    Recipe
+    @recipes = Recipe
     .includes(:ingredients, :tags)
     .merge(whereables_or
       .select(&:valid)
       .map(&:where)
       .reduce(:or)
     )
-    .merge(whereables_and
-      .select(&:valid)
-      .map(&:where)
-      .reduce(:and))
-    .references(:ingredients)
-    .limit(20)
+    .references(:ingredients, :tags)
+    # .limit(20)
     .offset(params[:offset])
+
+    params[:tags].split(',').each do |tag|
+      @recipes = @recipes.select{|recipe| recipe.tags.include?(Tag.find_by(name: tag))}
+    end
+
+    # @recipes = @recipes.limit(20)
+
+    return @recipes
   end
+
 end
