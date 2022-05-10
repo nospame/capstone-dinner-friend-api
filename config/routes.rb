@@ -7,4 +7,8 @@ Rails.application.routes.draw do
   get "/recipes/:id" => "recipes#show"
 
   get "/tags" => "tags#index"
+
+  post "/users" => "users#create"
+
+  post "/sessions" => "sessions#create"
 end
