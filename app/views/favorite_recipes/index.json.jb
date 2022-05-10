@@ -1,0 +1,7 @@
+@favorite_recipes.map do |favorite_recipe|
+  {
+    id: favorite_recipe.id,
+    recipe: favorite_recipe.recipe,
+    has_made: favorite_recipe.has_made
+  }
+end

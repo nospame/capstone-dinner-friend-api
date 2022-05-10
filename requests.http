@@ -31,3 +31,29 @@ Content-Type: application/json
   "email": "evan@email.com",
   "password": "password"
 }
+
+### Favorite Recipes Create
+POST http://localhost:3000/favorite_recipes.json
+Authorization: Bearer 
+Content-Type: application/json
+
+{
+  "recipe_id": 812
+}
+
+### Favorite Recipes Index
+GET http://localhost:3000/favorite_recipes.json
+Authorization: Bearer 
+
+### Favorite Recipes Update
+PATCH http://localhost:3000/favorite_recipes/2.json
+Authorization: Bearer 
+Content-Type: application/json
+
+{
+  "has_made": false
+}
+
+### Favorite Recipes Destroy
+DELETE http://localhost:3000/favorite_recipes/2.json
+Authorization: Bearer 
