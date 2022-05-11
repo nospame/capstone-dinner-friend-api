@@ -7,5 +7,6 @@
   ingredients_list: @recipe.ingredients_list,
   ingredients: @recipe.ingredients,
   steps: @recipe.steps,
-  favorited: @recipe.favorited?(current_user || false)
+  favorited: @recipe.favorited?(current_user || false),
+  has_made: @recipe.has_made?(current_user || false)
 }

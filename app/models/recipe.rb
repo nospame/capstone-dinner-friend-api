@@ -17,6 +17,12 @@ class Recipe < ApplicationRecord
       recipe_id: id) if current_user
   end
 
+  def has_made?(current_user)
+    FavoriteRecipe.find_by(
+      user_id: current_user.id, 
+      recipe_id: id).has_made if favorited?(current_user)
+  end
+
   def self.search(params)
     whereables = [
       Whereable.new(

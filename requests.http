@@ -1,4 +1,5 @@
 GET http://localhost:3000/recipes/752.json
+Authorization: Bearer
 
 ###
 GET http://localhost:3000/recipes.json?q=bread&tags=dinner,indian
