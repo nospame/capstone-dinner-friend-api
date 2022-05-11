@@ -1,7 +1,6 @@
 class RecipesController < ApplicationController
   def index
     @recipes = Recipe.search(params)
-
     render template: "recipes/index"
   end
 

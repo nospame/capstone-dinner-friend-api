@@ -11,6 +11,12 @@ class Recipe < ApplicationRecord
     end
   end
 
+  def favorited?(current_user)
+    FavoriteRecipe.exists?(
+      user_id: current_user.id, 
+      recipe_id: id) if current_user
+  end
+
   def self.search(params)
     whereables = [
       Whereable.new(
@@ -31,8 +37,6 @@ class Recipe < ApplicationRecord
       .reduce(:or)
     )
     .references(:ingredients, :tags)
-    # .limit(20)
-    # .offset(params[:offset])
     .order('recipes.name')
 
     if params[:tags]

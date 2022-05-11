@@ -6,5 +6,6 @@
   tags: @recipe.tags,
   ingredients_list: @recipe.ingredients_list,
   ingredients: @recipe.ingredients,
-  steps: @recipe.steps
+  steps: @recipe.steps,
+  favorited: @recipe.favorited?(current_user || false)
 }

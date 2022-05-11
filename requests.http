@@ -1,4 +1,4 @@
-GET http://localhost:3000/recipes/25.json
+GET http://localhost:3000/recipes/752.json
 
 ###
 GET http://localhost:3000/recipes.json?q=bread&tags=dinner,indian
@@ -56,4 +56,8 @@ Content-Type: application/json
 
 ### Favorite Recipes Destroy
 DELETE http://localhost:3000/favorite_recipes/2.json
+Authorization: Bearer 
+
+### Favorite Recipes 'show'
+GET http://localhost:3000/favorite_recipes/751.json
 Authorization: Bearer 

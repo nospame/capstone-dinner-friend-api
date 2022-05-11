@@ -23,8 +23,7 @@ class FavoriteRecipesController < ApplicationController
   end
 
   def destroy
-    favorite_recipe = FavoriteRecipe.find_by(id: params[:id], user_id: current_user.id)
-    # add a check that this recipe belongs to the current user
+    favorite_recipe = FavoriteRecipe.find_by(recipe_id: params[:id], user_id: current_user.id)
     favorite_recipe.destroy
     render json: {message: "Favorite removed."}
   end
