@@ -3,8 +3,11 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "articles#index"
-  get "/favorite_recipes" => "favorite_recipes#index"
+  get "/favorite_ingredients" => "favorite_ingredients#index"
+  post "/favorite_ingredients" => "favorite_ingredients#create"
+  delete "/favorite_ingredients/:ingredient_id" => "favorite_ingredients#destroy"
 
+  get "/favorite_recipes" => "favorite_recipes#index"
   post "/favorite_recipes" => "favorite_recipes#create"
   patch "/favorite_recipes/:recipe_id" => "favorite_recipes#update"
   delete "/favorite_recipes/:recipe_id" => "favorite_recipes#destroy"

@@ -1,0 +1,6 @@
+@favorite_ingredients.map do |favorite_ingredient|
+  {
+    id: favorite_ingredient.id,
+    ingredient: favorite_ingredient.ingredient
+  }
+end
