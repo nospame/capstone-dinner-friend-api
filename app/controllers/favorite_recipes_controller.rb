@@ -2,7 +2,7 @@ class FavoriteRecipesController < ApplicationController
   before_action :authenticate_user
 
   def index
-    @favorite_recipes = FavoriteRecipe.where(user_id: current_user.id)
+    @favorite_recipes = FavoriteRecipe.where(user_id: current_user.id).order('created_at DESC')
     render template: 'favorite_recipes/index'
   end
 

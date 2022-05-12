@@ -1,5 +1,6 @@
 {
   id: @favorite_recipe.id,
   recipe: @favorite_recipe.recipe,
-  has_made: @favorite_recipe.has_made
+  has_made: @favorite_recipe.has_made,
+  created_at: @favorite_recipe.created_at
 }

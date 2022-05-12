@@ -4,6 +4,7 @@ class Recipe < ApplicationRecord
   has_many :recipe_ingredients
   has_many :ingredients, through: :recipe_ingredients
   has_many :steps
+  has_many :favorite_recipes
 
   def ingredients_list
     recipe_ingredients.map do |ri|
