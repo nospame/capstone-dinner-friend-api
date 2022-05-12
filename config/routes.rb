@@ -6,8 +6,8 @@ Rails.application.routes.draw do
   get "/favorite_recipes" => "favorite_recipes#index"
 
   post "/favorite_recipes" => "favorite_recipes#create"
-  patch "/favorite_recipes/:id" => "favorite_recipes#update"
-  delete "/favorite_recipes/:id" => "favorite_recipes#destroy"
+  patch "/favorite_recipes/:recipe_id" => "favorite_recipes#update"
+  delete "/favorite_recipes/:recipe_id" => "favorite_recipes#destroy"
 
   get "/recipes" => "recipes#index"
   get "/recipes/:id" => "recipes#show"

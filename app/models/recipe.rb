@@ -43,7 +43,7 @@ class Recipe < ApplicationRecord
       .reduce(:or)
     )
     .references(:ingredients, :tags)
-    .order('recipes.name')
+    .order("recipes.name #{params[:sort]}")
 
     if params[:tags]
       params[:tags].split(',').each do |tag|
