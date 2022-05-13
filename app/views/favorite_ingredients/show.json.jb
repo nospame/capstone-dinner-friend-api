@@ -1,4 +1,0 @@
-{
-  id: @favorite_ingredient.id,
-  ingredient: @favorite_ingredient.ingredient,
-}

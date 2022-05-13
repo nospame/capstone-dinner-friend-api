@@ -1,0 +1,6 @@
+@favorite_searches.map do |favorite_search|
+  {
+    id: favorite_search.id,
+    search_term: favorite_search.search_term
+  }
+end

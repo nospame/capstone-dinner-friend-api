@@ -63,22 +63,18 @@ Authorization: Bearer
 GET http://localhost:3000/favorite_recipes/751.json
 Authorization: Bearer 
 
-### Fav Ingredients Index
-GET http://localhost:3000/favorite_ingredients.json
-Authorization: Bearer
+### Fav Searches Index
+GET http://localhost:3000/favorite_searches.json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE2NTI1NDgwOTd9.szARFAcdcPMoiBmTMqUcXmk-ytfLHskyH7_IlEmyqe0
 
-### Fav Ingredients Create
-POST http://localhost:3000/favorite_ingredients.json
+### Fav Searches Create
+POST http://localhost:3000/favorite_searches.json
 Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE2NTI1NDgwOTd9.szARFAcdcPMoiBmTMqUcXmk-ytfLHskyH7_IlEmyqe0
 Content-type: application/json
 
 {
-  "ingredient_id": 97
+  "search_term": "nachos"
 }
-
-### Fav Ingredients Destroy
-DELETE http://localhost:3000/favorite_ingredients/712.json
-Authorization: Bearer
 
 ###
 GET http://localhost:3000/recipe_ingredients/712.json

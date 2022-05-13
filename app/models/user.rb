@@ -5,6 +5,5 @@ class User < ApplicationRecord
 
   has_many :favorite_recipes
   has_many :recipes, through: :favorite_recipes
-  has_many :favorite_ingredients
-  has_many :ingredients, through: :favorite_ingredients
+  has_many :favorite_searches
 end
