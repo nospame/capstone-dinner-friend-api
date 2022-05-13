@@ -65,11 +65,11 @@ Authorization: Bearer
 
 ### Fav Searches Index
 GET http://localhost:3000/favorite_searches.json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE2NTI1NDgwOTd9.szARFAcdcPMoiBmTMqUcXmk-ytfLHskyH7_IlEmyqe0
+Authorization: Bearer
 
 ### Fav Searches Create
 POST http://localhost:3000/favorite_searches.json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE2NTI1NDgwOTd9.szARFAcdcPMoiBmTMqUcXmk-ytfLHskyH7_IlEmyqe0
+Authorization: Bearer
 Content-type: application/json
 
 {

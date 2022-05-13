@@ -1,6 +1,6 @@
 require 'csv'
 
-table = CSV.parse(File.read("recipes_w_search_terms.csv"), headers: true)
+table = CSV.parse(File.read("10k_recipes.csv"), headers: true)
 table.each do |row|
   # create the recipe with independent attributes
   recipe = Recipe.create!(
