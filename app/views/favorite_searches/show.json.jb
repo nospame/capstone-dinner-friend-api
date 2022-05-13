@@ -1,4 +1,5 @@
 {
   id: @favorite_search.id,
-  search_term: @favorite_search.search_term
+  search_term: @favorite_search.search_term,
+  tags: @favorite_search.tags_list
 }

@@ -73,7 +73,8 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE2NTI1NDgwO
 Content-type: application/json
 
 {
-  "search_term": "nachos"
+  "q": "burrito",
+  "tags": "mexican,dinner"
 }
 
 ###
