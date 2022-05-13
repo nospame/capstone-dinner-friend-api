@@ -7,11 +7,10 @@ class FavoriteRecipesController < ApplicationController
   end
 
   def create
-    @favorite_recipe = FavoriteRecipe.new(
+    @favorite_recipe = FavoriteRecipe.find_or_create_by(
       user_id: current_user.id,
       recipe_id: params[:recipe_id]
     )
-    @favorite_recipe.save
     render template: 'favorite_recipes/show'
   end
 

@@ -33,6 +33,10 @@ class Recipe < ApplicationRecord
       Whereable.new(
         valid: params[:q] ? true : false,
         where: Recipe.where("ingredients.name ILIKE ?", "%#{params[:q]}%")
+      ),
+      Whereable.new(
+        valid: params[:q] ? false : true,
+        where: Recipe.all
       )
     ]
 
@@ -51,11 +55,11 @@ class Recipe < ApplicationRecord
         tag = Tag.find_by(name: tag)
         @recipes = @recipes.select{|recipe| recipe.tags.include?(tag)}
       end
+      @recipes = @recipes.slice(params[:offset].to_i || 0, 20)
+    else
+      @recipes = @recipes.limit(20).offset(params[:offset])
     end
-
-    @recipes = @recipes.slice(params[:offset].to_i || 0, 20)
 
     return @recipes
   end
-
 end

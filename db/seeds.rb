@@ -1,12 +1,10 @@
 require 'csv'
-require 'benchmark'
 
-puts Benchmark.measure{
 table = CSV.parse(File.read("recipes_w_search_terms.csv"), headers: true)
 table.each do |row|
   # create the recipe with independent attributes
   recipe = Recipe.create!(
-    name: CGI::unescapeHTML(row["name"]).squeeze(' ').titleize,
+    name: CGI::unescapeHTML(row["name"]).gsub("\\u00", "%").squeeze(' ').titleize,
     description: CGI::unescapeHTML(row["description"] || ''),
     servings: row["servings"].to_i
   )
@@ -71,4 +69,3 @@ table.each do |row|
   end
   p "#{recipe.name} created"
 end
-}

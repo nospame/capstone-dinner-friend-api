@@ -7,7 +7,7 @@ GET http://localhost:3000/recipes.json?q=bread&tags=dinner,indian
 
 
 ###
-GET http://localhost:3000/recipes.json?tags=1,71
+GET http://localhost:3000/recipes.json
 
 
 ###
@@ -69,11 +69,11 @@ Authorization: Bearer
 
 ### Fav Ingredients Create
 POST http://localhost:3000/favorite_ingredients.json
-Authorization: Bearer
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE2NTI1NDgwOTd9.szARFAcdcPMoiBmTMqUcXmk-ytfLHskyH7_IlEmyqe0
 Content-type: application/json
 
 {
-  "ingredient_id": 91
+  "ingredient_id": 97
 }
 
 ### Fav Ingredients Destroy
@@ -82,3 +82,7 @@ Authorization: Bearer
 
 ###
 GET http://localhost:3000/recipe_ingredients/712.json
+
+
+###
+GET http://localhost:3000/ingredients/12.json

@@ -5,11 +5,10 @@ class FavoriteIngredientsController < ApplicationController
   end
 
   def create
-    @favorite_ingredient = FavoriteIngredient.new(
+    @favorite_ingredient = FavoriteIngredient.find_or_create_by(
       user_id: current_user.id,
       ingredient_id: params[:ingredient_id]
     )
-    @favorite_ingredient.save
     render template: 'favorite_ingredients/show'
   end
 
