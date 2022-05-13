@@ -50,14 +50,14 @@ class Recipe < ApplicationRecord
     .references(:ingredients, :tags)
     .order("recipes.name #{params[:sort]}")
 
-    if params[:tags]
+    if !params[:tags] || params[:tags] == ''
+      @recipes = @recipes.limit(20).offset(params[:offset])
+    else
       params[:tags].split(',').each do |tag|
         tag = Tag.find_by(name: tag)
         @recipes = @recipes.select{|recipe| recipe.tags.include?(tag)}
       end
       @recipes = @recipes.slice(params[:offset].to_i || 0, 20)
-    else
-      @recipes = @recipes.limit(20).offset(params[:offset])
     end
 
     return @recipes
