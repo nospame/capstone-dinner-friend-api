@@ -12,7 +12,7 @@ class FavoriteSearchesController < ApplicationController
       search_term: params[:q]
     )
     if params[:tags]
-      params[:tags].split(',').each do |tag|
+      params[:tags].each do |tag|
         SearchTag.create(
           favorite_search_id: @favorite_search.id,
           tag_id: Tag.find_by(name: tag).id
