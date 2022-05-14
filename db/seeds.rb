@@ -13,7 +13,7 @@ table.each do |row|
   steps = row["steps"].delete("[]").delete_prefix("'").delete_suffix("'").split("\', \'")
   steps.each do |step|
     Step.create!(
-      description: step,
+      description: CGI::unescapeHTML(step),
       recipe_id: recipe.id
     )
   end
