@@ -23,10 +23,10 @@ class FavoriteSearchesController < ApplicationController
   end
 
   def destroy
-    favorite_search = FavoriteSearch.find_by(search_term: params[:q], user_id: current_user.id)
+    favorite_search = FavoriteSearch.find_by(id: params[:id], user_id: current_user.id)
     search_tags = SearchTag.where(favorite_search_id: favorite_search.id)
+    search_tags.destroy_all
     favorite_search.destroy
-    search_tags.destroy
     render json: {message: "Favorite search removed."}
   end
 end

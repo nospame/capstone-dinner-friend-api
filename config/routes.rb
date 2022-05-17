@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   # root "articles#index"
   get "/favorite_searches" => "favorite_searches#index"
   post "/favorite_searches" => "favorite_searches#create"
-  delete "/favorite_searches/:ingredient_id" => "favorite_searches#destroy"
+  delete "/favorite_searches/:id" => "favorite_searches#destroy"
 
   get "/favorite_recipes" => "favorite_recipes#index"
   post "/favorite_recipes" => "favorite_recipes#create"
