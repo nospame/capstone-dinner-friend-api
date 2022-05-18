@@ -1,12 +1,17 @@
 # Dinner Party's Friend (API)
-Helps plan food-based social events (i.e. "dinner parties") by searching for recipes based on ingredient or tags and giving information on drink pairings.
+Helps plan food-based social events (i.e. "dinner parties") -- search for recipes, filter by tags, save your favorite recipes and mark once cooked, save your favorite search queries for later!
 
-This is the backend search only, a PostgreSQL database accepting GET requests for 
-`/recipes.json?query=SEARCH_TERM&offset=OPTIONAL_ITEMS_TO_SKIP` and 
-`/recipes/:RECIPE_ID.json`.
+This is the backend search and other API functionality, using a Postgres database. 
+Primarily accepts GET requests in the form of:
+```
+/recipes.json?query=SEARCH_TERM&tags=COMMA,SEPARATED,TAGS
+``` 
+and 
+```
+/recipes/:RECIPE_ID.json
+```
 
-* App version
-0.3
+Find the frontend with full functionality online at: https://nospame-capstone-frontend.netlify.app/
 
 * Ruby version
 3.0.3
