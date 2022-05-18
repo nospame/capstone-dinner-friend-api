@@ -1,6 +1,6 @@
 require 'csv'
 
-table = CSV.parse(File.read("10k_recipes.csv"), headers: true)
+table = CSV.parse(File.read("200_recipes.csv"), headers: true)
 table.each do |row|
   # create the recipe with independent attributes
   recipe = Recipe.create!(
@@ -23,13 +23,13 @@ table.each do |row|
 
   # create each tag if needed
   tags.each do |t|
-    tag = Tag.find_by(name: t) || Tag.create!(name: t)
+      tag = Tag.find_or_create_by(name: t)
 
-    # create recipe_tags to associate
-    RecipeTag.create!(
-      recipe_id: recipe.id,
-      tag_id: tag.id
-    )
+      # create recipe_tags to associate
+      RecipeTag.create!(
+        recipe_id: recipe.id,
+        tag_id: tag.id
+      )
   end
 
   # split the ingredients
@@ -57,7 +57,7 @@ table.each do |row|
  
   # create each ingredient if needed
   formatted_details.each do |f_d|
-    ingredient = Ingredient.find_by(name: f_d[:name]) || Ingredient.create!(name: f_d[:name])
+    ingredient = Ingredient.find_or_create_by(name: f_d[:name])
 
     # create recipe_ingredients to associate
     RecipeIngredient.create!(

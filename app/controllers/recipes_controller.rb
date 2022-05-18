@@ -9,5 +9,3 @@ class RecipesController < ApplicationController
     render template: "recipes/show"
   end
 end
-
-

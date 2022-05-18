@@ -2,7 +2,7 @@ GET http://localhost:3000/recipes/752.json
 Authorization: Bearer
 
 ###
-GET http://localhost:3000/recipes.json?q=bread&tags=dinner,indian
+GET http://localhost:3000/recipes.json?q=bread&sort=asc
 
 
 
@@ -65,7 +65,7 @@ Authorization: Bearer
 
 ### Fav Searches Index
 GET http://localhost:3000/favorite_searches.json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE2NTI2MzMwNjV9.gxsFgArZTt94yF0TFCd4MryhBv9HHq9rq3QDePsqy1c
+Authorization: Bearer 
 
 ### Fav Searches Create
 POST http://localhost:3000/favorite_searches.json
